@@ -1,0 +1,85 @@
+* {
+  font-family: "Nunito", sans-serif;
+  text-decoration: none;
+}
+
+/*----- colors -----*/
+:root{
+    --back-ground-primary: #06327B;
+    --back-ground-second: #305B92;
+    --back-ground-third: #133E8A;
+    --typography: #FFFFFF;
+}
+
+/*----- font sizes -----*/
+:root{
+    --text-body: 16px;
+    --text-subtitle: 14px;
+    --text-header-h3: 48px;
+    --text-header-h6: 20px;
+}
+
+/*----- fotn weight -----*/
+:root{
+    --medium: 500;
+    --blod: 700;
+}
+
+/*========== header ==========*/
+.header{
+    background-color: var(--back-ground-primary);
+}
+
+.header .logo h3{
+    color: var(--typography);
+    font-weight: var(--blod);
+}
+
+.header .search input{
+    background-color: var(--back-ground-third);
+    color: var(--typography);
+    border-radius: 0px 30px 30px 0px;
+    border: none;
+    font-size: var(--text-body);
+    font-weight: var(--medium);
+}
+
+.header .search input::placeholder{
+    color: var(--typography);
+    font-size: var(--text-body);
+    font-weight: var(--medium);    
+}
+
+.header .search .btnSearch{
+    border: none;
+    border-radius: 50% 0% 0 50%;
+    background-color: var(--back-ground-third);
+    color: var(--typography);
+}
+
+.header .notify{
+    color: var(--typography);
+    font-size: var(--text-header-h6);
+}
+
+.header .formats .dropdown .btnFormats{
+    border: none;
+    border-radius: 10px;
+    background-color: var(--back-ground-third);
+    color: var(--typography);
+    font-size: var(--text-header-h6);
+    font-weight: var(--medium);
+}
+
+.header .formats .dropdown .dropdown-menu{
+    background-color: var(--back-ground-third);
+}
+
+.header .formats .dropdown .dropdown-menu li a{
+    color: var(--typography);
+}
+
+.header .formats .dropdown .dropdown-menu li a:hover{
+    background-color: var(--back-ground-second);
+}
+
