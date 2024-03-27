@@ -83,3 +83,32 @@
     background-color: var(--back-ground-second);
 }
 
+/*========== header media ==========*/
+@media screen and (max-width: 991px) {
+    .desktop{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .tablet{
+        display: none;
+    }
+
+    .mobile{
+        display: none;
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+    .mobile{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .tablet{
+        display: none;
+    }
+}
+
