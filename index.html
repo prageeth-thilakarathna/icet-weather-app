@@ -35,16 +35,11 @@
                 <h3 class="my-2 ms-3">Weather App</h3>
             </div>
 
-            <div class="col-lg-7 col-xxl-8 search">
-                <form class="d-flex my-2" role="search">
-                    <button class="btnSearch" type="submit"><i class="fa fa-search" aria-hidden="true"
-                            style="width: 30px;"></i></button>
-                    <input class="form-control me-2 focus-ring" type="search" placeholder="Search City..."
-                        aria-label="Search" style="--bs-focus-ring-color: var(--label_extra); 
-                    --bs-focus-ring-x: 0px;
-                    --bs-focus-ring-y: 0px;
-                    --bs-focus-ring-blur: 1px;">
-                </form>
+            <div class="col-lg-7 col-xxl-8 search d-flex my-2">
+                <button class="btnSearch" type="submit"><i class="fa fa-search" aria-hidden="true" style="width: 30px;"
+                        onclick="getWeatherForecast(document.getElementById(`searchCity`).value)"></i></button>
+                <input class="form-control me-2 focus-ring" type="search" id="searchCity" placeholder="Search City..."
+                    aria-label="Search" style="--bs-focus-ring-color: var(--label_extra);">
             </div>
 
             <div class="col-lg-1 notify text-end">
@@ -52,15 +47,11 @@
             </div>
 
             <div class="col-lg-1 formats text-end">
-                <div class="dropdown my-2 me-3">
-                    <button class="btnFormats px-2" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        &deg;C
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">&deg;C</a></li>
-                        <li><a class="dropdown-item" href="#">&deg;F</a></li>
-                    </ul>
+                <div class="my-2 me-3">
+                    <select class="form focus-ring py-2 px-2" id="getFormatValue" style="--bs-focus-ring-color: var(--label_extra);">
+                        <option selected value="C">&deg;C</option>
+                        <option value="F">&deg;F</option>
+                    </select>
                 </div>
             </div>
         </div>
@@ -79,8 +70,7 @@
 
             <div class="col-md-2 col-sm-2 formats text-end ps-0">
                 <div class="dropdown my-2 me-3">
-                    <button class="btnFormats px-2" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button class="btnFormats px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         &deg;C
                     </button>
                     <ul class="dropdown-menu">
@@ -119,8 +109,7 @@
 
             <div class="col-3 formats text-end ps-0">
                 <div class="dropdown my-2 me-3">
-                    <button class="btnFormats px-2" type="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
+                    <button class="btnFormats px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         &deg;C
                     </button>
                     <ul class="dropdown-menu">
@@ -146,8 +135,74 @@
         </div>
     </div>
 
+    <!-- location -->
+    <div class="container-fluid location desktop py-2">
+        <div class="row">
+            <div class="col-lg-6">
+                <h6 class="py-1 mb-0 ms-3"><i class="fa fa-map-marker" aria-hidden="true"></i> <span id="setLocation"></span></h6>
+            </div>
 
-    
+            <div class="col-lg-3 text-center">
+                <button class="label px-3">10 Days Forecast</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- weather -->
+    <div class="container-fluid weather">
+        <div class="row">
+            <!-- current weather-->
+            <div class="col-lg-6 current">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h6 class="card-title">Current Weather</h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <h6 class="card-subtitle" id="setDate"></h6>
+                            </div>
+                            <div class="col-lg-2">
+                                <h6 class="time" id="setTime"></h6>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <img src="" alt="weather-img" id="setWeatherImg">
+                            </div>
+                            <div class="col-lg-6">
+                                <h6 id="setTemp"></h6>
+                                <span>Rain</span>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

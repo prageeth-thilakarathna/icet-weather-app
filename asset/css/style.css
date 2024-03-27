@@ -1,10 +1,10 @@
 * {
-  font-family: "Nunito", sans-serif;
-  text-decoration: none;
+    font-family: "Nunito", sans-serif;
+    text-decoration: none;
 }
 
 /*----- colors -----*/
-:root{
+:root {
     --back-ground-primary: #06327B;
     --back-ground-second: #305B92;
     --back-ground-third: #133E8A;
@@ -12,7 +12,7 @@
 }
 
 /*----- font sizes -----*/
-:root{
+:root {
     --text-body: 16px;
     --text-subtitle: 14px;
     --text-header-h3: 48px;
@@ -20,22 +20,22 @@
 }
 
 /*----- fotn weight -----*/
-:root{
+:root {
     --medium: 500;
     --blod: 700;
 }
 
 /*========== header ==========*/
-.header{
+.header {
     background-color: var(--back-ground-primary);
 }
 
-.header .logo h3{
+.header .logo h3 {
     color: var(--typography);
     font-weight: var(--blod);
 }
 
-.header .search input{
+.header .search input {
     background-color: var(--back-ground-third);
     color: var(--typography);
     border-radius: 0px 30px 30px 0px;
@@ -44,25 +44,25 @@
     font-weight: var(--medium);
 }
 
-.header .search input::placeholder{
+.header .search input::placeholder {
     color: var(--typography);
     font-size: var(--text-body);
-    font-weight: var(--medium);    
+    font-weight: var(--medium);
 }
 
-.header .search .btnSearch{
+.header .search .btnSearch {
     border: none;
     border-radius: 50% 0% 0 50%;
     background-color: var(--back-ground-third);
     color: var(--typography);
 }
 
-.header .notify{
+.header .notify {
     color: var(--typography);
     font-size: var(--text-header-h6);
 }
 
-.header .formats .dropdown .btnFormats{
+.header .formats .form {
     border: none;
     border-radius: 10px;
     background-color: var(--back-ground-third);
@@ -71,44 +71,104 @@
     font-weight: var(--medium);
 }
 
-.header .formats .dropdown .dropdown-menu{
-    background-color: var(--back-ground-third);
+
+/*========== location ==========*/
+.location {
+    background-color: var(--back-ground-primary);
 }
 
-.header .formats .dropdown .dropdown-menu li a{
+.location h6 {
+    font-size: var(--text-body);
+    font-weight: var(--medium);
     color: var(--typography);
 }
 
-.header .formats .dropdown .dropdown-menu li a:hover{
-    background-color: var(--back-ground-second);
+.location .label {
+    border: none;
+    font-size: var(--text-body);
+    font-weight: var(--medium);
+    color: var(--typography);
+    background-color: var(--back-ground-third);
+    border-radius: 30px;
 }
 
-/*========== header media ==========*/
+
+/*========== weather =========*/
+.weather .current .card {
+    background-color: var(--back-ground-second);
+    color: var(--typography);
+}
+
+.weather .current .card .card-title{
+    font-size: var(--text-subtitle);
+    font-weight: var(--medium);
+}
+
+.weather .current .card .card-subtitle{
+    font-size: var(--text-header-h6);
+    font-weight: var(--medium);
+    color: var(--typography);
+}
+
+.weather .current .card .card-subtitle .time{
+    font-size: var(--text-subtitle);
+    font-weight: var(--medium);
+    color: var(--typography);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*========== media ==========*/
 @media screen and (max-width: 991px) {
-    .desktop{
+    .desktop {
         display: none;
     }
 }
 
 @media screen and (min-width: 992px) {
-    .tablet{
+    .tablet {
         display: none;
     }
 
-    .mobile{
+    .mobile {
         display: none;
     }
 }
 
 @media screen and (min-width: 576px) and (max-width: 991px) {
-    .mobile{
+    .mobile {
         display: none;
     }
 }
 
 @media screen and (max-width: 575px) {
-    .tablet{
+    .tablet {
         display: none;
     }
 }
-
