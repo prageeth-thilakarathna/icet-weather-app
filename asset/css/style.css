@@ -17,6 +17,7 @@
     --text-subtitle: 14px;
     --text-header-h3: 48px;
     --text-header-h6: 20px;
+    --text-header-h4: 34px;
 }
 
 /*----- fotn weight -----*/
@@ -121,12 +122,12 @@
     font-weight: var(--medium);
 }
 
-.weather .current .card .label{
+.weather .label{
     font-size: var(--text-subtitle);
     font-weight: var(--medium);
 }
 
-.weather .current .card .value{
+.weather .value{
     font-size: var(--text-body);
     font-weight: var(--medium);
 }
@@ -140,6 +141,27 @@
     background-color: var(--back-ground-third);
     border-radius: 30px;
     cursor: default;
+}
+
+.weather .forecast .card{
+    background-color: var(--back-ground-third);
+    color: var(--typography);
+}
+
+.weather .forecast .card .card-title{
+    font-size: var(--text-header-h6);
+    font-weight: var(--medium);
+}
+
+.weather .forecast .card .forecastImg{
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.weather .forecast .card .temp{
+    font-size: var(--text-header-h4);
+    font-weight: var(--blod);
 }
 
 
