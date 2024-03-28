@@ -28,122 +28,31 @@
 </head>
 
 <body>
-    <!-- header desktop -->
-    <div class="container-fluid header desktop">
+    <!-- header -->
+    <div class="container-fluid header">
         <div class="row">
-            <div class="col-lg-3 col-xxl-2 logo">
-                <h3 class="my-2 ms-3">Weather App</h3>
+            <div class="col-6 col-sm-8 col-md-8 col-lg-3 col-xxl-2 logo">
+                <h3 class="my-3 ms-3">Weather App</h3>
             </div>
 
-            <div class="col-lg-7 col-xxl-8 search d-flex my-2">
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 notify text-end">
+                <i class="fa fa-bell mt-4" aria-hidden="true" style="cursor: pointer;"></i>
+            </div>
+
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 formats text-end">
+                <div class="my-3 me-3">
+                    <select class="form focus-ring py-2 px-2" id="getFormatValue" style="--bs-focus-ring-color: var(--label_extra);">
+                        <option selected value="C" onclick="formatController()">&deg;C</option>
+                        <option value="F" onclick="formatController()">&deg;F</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xxl-8 search d-flex my-3 px-4">
                 <button class="btnSearch" type="submit"><i class="fa fa-search" aria-hidden="true" style="width: 30px;"
                         onclick="getWeatherForecast(document.getElementById(`searchCity`).value)"></i></button>
                 <input class="form-control me-2 focus-ring" type="search" id="searchCity" placeholder="Search City..."
                     aria-label="Search" style="--bs-focus-ring-color: var(--label_extra);">
-            </div>
-
-            <div class="col-lg-1 notify text-end">
-                <i class="fa fa-bell mt-3" aria-hidden="true" style="cursor: pointer;"></i>
-            </div>
-
-            <div class="col-lg-1 formats text-end">
-                <div class="my-2 me-3">
-                    <select class="form focus-ring py-2 px-2" id="getFormatValue" style="--bs-focus-ring-color: var(--label_extra);">
-                        <option selected value="C">&deg;C</option>
-                        <option value="F">&deg;F</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- header tablet -->
-    <div class="container-fluid header tablet">
-        <div class="row">
-            <div class="col-md-9 col-sm-9 logo">
-                <h3 class="my-2 ms-3">Weather App</h3>
-            </div>
-
-            <div class="col-md-1 col-sm-1 notify text-end pe-0">
-                <i class="fa fa-bell mt-3" aria-hidden="true" style="cursor: pointer;"></i>
-            </div>
-
-            <div class="col-md-2 col-sm-2 formats text-end ps-0">
-                <div class="dropdown my-2 me-3">
-                    <button class="btnFormats px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        &deg;C
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">&deg;C</a></li>
-                        <li><a class="dropdown-item" href="#">&deg;F</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 col-sm-12 search px-5">
-                <form class="d-flex my-2 mx-5" role="search">
-                    <button class="btnSearch" type="submit"><i class="fa fa-search" aria-hidden="true"
-                            style="width: 30px;"></i></button>
-                    <input class="form-control me-2 focus-ring" type="search" placeholder="Search City..."
-                        aria-label="Search" style="--bs-focus-ring-color: var(--label_extra); 
-                    --bs-focus-ring-x: 0px;
-                    --bs-focus-ring-y: 0px;
-                    --bs-focus-ring-blur: 1px;">
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- header mobile -->
-    <div class="container-fluid header mobile">
-        <div class="row">
-            <div class="col-7 logo">
-                <h3 class="my-2 ms-3">Weather App</h3>
-            </div>
-
-            <div class="col-2 notify text-end pe-0">
-                <i class="fa fa-bell mt-3" aria-hidden="true" style="cursor: pointer;"></i>
-            </div>
-
-            <div class="col-3 formats text-end ps-0">
-                <div class="dropdown my-2 me-3">
-                    <button class="btnFormats px-2" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        &deg;C
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">&deg;C</a></li>
-                        <li><a class="dropdown-item" href="#">&deg;F</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-12 search px-5">
-                <form class="d-flex my-2" role="search">
-                    <button class="btnSearch" type="submit"><i class="fa fa-search" aria-hidden="true"
-                            style="width: 30px;"></i></button>
-                    <input class="form-control me-2 focus-ring" type="search" placeholder="Search City..."
-                        aria-label="Search" style="--bs-focus-ring-color: var(--label_extra); 
-                    --bs-focus-ring-x: 0px;
-                    --bs-focus-ring-y: 0px;
-                    --bs-focus-ring-blur: 1px;">
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- location -->
-    <div class="container-fluid location desktop py-2">
-        <div class="row">
-            <div class="col-lg-6">
-                <h6 class="py-1 mb-0 ms-3"><i class="fa fa-map-marker" aria-hidden="true"></i> <span id="setLocation"></span></h6>
-            </div>
-
-            <div class="col-lg-3 text-center">
-                <button class="label px-3">10 Days Forecast</button>
             </div>
         </div>
     </div>
@@ -152,40 +61,97 @@
     <div class="container-fluid weather">
         <div class="row">
             <!-- current weather-->
-            <div class="col-lg-6 current">
+            <div class="col-12 col-sm-12 col-md-7 col-lg-5 current">
+                <div class="location my-3">
+                    <h6 class="py-1 mb-0 ms-3"><i class="fa fa-map-marker" aria-hidden="true"></i> <span id="setLocation"></span></h6>
+                </div>
+
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
-                            <div class="col-lg-4">
+                            <div class="col-12">
                                 <h6 class="card-title">Current Weather</h6>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-lg-10">
+                        <div class="row mt-2">
+                            <div class="col-6">
                                 <h6 class="card-subtitle" id="setDate"></h6>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-6 text-end">
                                 <h6 class="time" id="setTime"></h6>
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-lg-6">
-                                <img src="" alt="weather-img" id="setWeatherImg">
+                            <div class="col-6">
+                                <img src="" class="weatherImg" alt="weather-img" id="setWeatherImg">
                             </div>
-                            <div class="col-lg-6">
-                                <h6 id="setTemp"></h6>
-                                <span>Rain</span>
+                            <div class="col-6">
+                                <h6 class="mt-2 mb-0"><span id="setTemp" class="temp"></span><span id="setFormat" class="tempFormat"></span></h6>
+                                <span id="setCondition" class="value"></span><br>
+                                <span class="label">Feels like : </span><span class="value" id="setFeelsLike"></span>
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-6">
+                                <h6><span class="label">Wind : </span><span class="value" id="setWind"></span></h6>
+                            </div>
+                            <div class="col-6">
+                                <h6><span class="label">Wind Degree : </span><span class="value" id="setWindDegree"></span></h6>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-6">
+                                <h6><span class="label">Wind Diraction : </span><span class="value" id="setWindDir"></span></h6>
+                            </div>
+                            <div class="col-6">
+                                <h6><span class="label">Pressure : </span><span class="value" id="setPressure"></span></h6>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-6">
+                                <h6><span class="label">Precip : </span><span class="value" id="setPrecip"></span></h6>
+                            </div>
+                            <div class="col-6">
+                                <h6><span class="label">Humidity : </span><span class="value" id="setHumidity"></span></h6>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-6">
+                                <h6><span class="label">Cloud : </span><span class="value" id="setCloud"></span></h6>
+                            </div>
+                            <div class="col-6">
+                                <h6><span class="label">Visibility : </span><span class="value" id="setVis"></span></h6>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-6">
+                                <h6><span class="label">UV Radiation : </span><span class="value" id="setUV"></span></h6>
+                            </div>
+                            <div class="col-6">
+                                <h6><span class="label">Gust Wind : </span><span class="value" id="setGustWind"></span></h6>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="col-12">
+                                <h6><span class="label">Air Quality (PM2.5) : </span><span class="value" id="setAirQuality"></span></h6>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+
+            <!-- forecast -->
+            <div class="col-lg-7 forecast">
+                <div class="my-3">
+                    <button class="label px-3">10 Days Forecast</button>
                 </div>
             </div>
         </div>
