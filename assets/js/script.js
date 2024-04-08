@@ -236,16 +236,28 @@ var swiper = new Swiper(".futureSlider", {
         prevEl: ".futureSliderPrev",
     },
     breakpoints: {
-        640: {
+        0: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+        },
+        576: {
             slidesPerView: 2,
             spaceBetween: 20,
         },
         768: {
-            slidesPerView: 4,
+            slidesPerView: 1,
             spaceBetween: 40,
         },
         992: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+        },
+        1200: {
             slidesPerView: 3,
+            spaceBetween: 10,
+        },
+        1400: {
+            slidesPerView: 4,
             spaceBetween: 10,
         },
     },
