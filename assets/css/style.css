@@ -74,7 +74,7 @@
 
 
 /*========== weather =========*/
-.weather{
+.weather {
     background-color: var(--back-ground-primary);
 }
 
@@ -91,43 +91,43 @@
     color: var(--typography);
 }
 
-.weather .current .card .card-title{
+.weather .current .card .card-title {
     font-size: var(--text-subtitle);
     font-weight: var(--medium);
 }
 
-.weather .current .card .card-subtitle{
+.weather .current .card .card-subtitle {
     font-size: var(--text-header-h6);
     font-weight: var(--medium);
 }
 
-.weather .current .card .card-subtitle .time{
+.weather .current .card .card-subtitle .time {
     font-size: var(--text-subtitle);
     font-weight: var(--medium);
 }
 
-.weather .current .card .weatherImg{
+.weather .current .card .weatherImg {
     width: 150px;
     height: 150px;
     object-fit: contain;
 }
 
-.weather .current .card .temp{
+.weather .current .card .temp {
     font-size: var(--text-header-h3);
     font-weight: var(--blod);
 }
 
-.weather .current .card .tempFormat{
+.weather .current .card .tempFormat {
     font-size: var(--text-header-h6);
     font-weight: var(--medium);
 }
 
-.weather .label{
+.weather .label {
     font-size: var(--text-subtitle);
     font-weight: var(--medium);
 }
 
-.weather .value{
+.weather .value {
     font-size: var(--text-body);
     font-weight: var(--medium);
 }
@@ -143,27 +143,87 @@
     cursor: default;
 }
 
-.weather .forecast .card{
+.weather .forecast .card {
     background-color: var(--back-ground-third);
     color: var(--typography);
 }
 
-.weather .forecast .card .card-title{
+.weather .forecast .card .card-title {
     font-size: var(--text-header-h6);
     font-weight: var(--medium);
 }
 
-.weather .forecast .card .forecastImg{
+.weather .forecast .card .forecastImg {
     width: 100px;
     height: 100px;
     object-fit: contain;
 }
 
-.weather .forecast .card .temp{
+.weather .forecast .card .temp {
     font-size: var(--text-header-h4);
     font-weight: var(--blod);
 }
 
+
+/*========== map and history ==========*/
+.map {
+    background-color: var(--back-ground-primary);
+}
+
+.map .history .past {
+    max-height: 500px;
+}
+
+.map .label {
+    border: none;
+    font-size: var(--text-body);
+    font-weight: var(--medium);
+    color: var(--typography);
+    background-color: var(--back-ground-third);
+    border-radius: 30px;
+    cursor: default;
+}
+
+.map .weather_map .interactive_weather_map {
+    border: 3px solid var(--back-ground-second);
+    border-radius: 10px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+}
+
+.map .history .past .card {
+    background-color: var(--back-ground-third);
+    color: var(--typography);
+}
+
+.map .history .past .card .card-title{
+    font-size: var(--text-header-h6);
+    font-weight: var(--medium);
+}
+
+.map .history .past .card .condition{
+    font-size: var(--text-body);
+    font-weight: var(--medium);
+}
+
+.map .history .past .card img{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+
+.map .history .past .card h4 .temp{
+    font-size: var(--text-header-h4);
+    font-weight: var(--blod);
+}
+
+.map .history .past .card h4 .format{
+    font-size: var(--text-header-h6);
+    font-weight: var(--medium);
+}
 
 
 

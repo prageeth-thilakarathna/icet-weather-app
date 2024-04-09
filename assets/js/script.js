@@ -11,7 +11,10 @@ window.onload = function () {
 
 function getWeatherForecast(city) {
     $(".swiper-slide").remove();
+    $(".pastSlider").remove();
     try {
+        const format = document.getElementById("getFormatValue").value;
+
         fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${city}&days=10&aqi=yes&alerts=yes`)
             .then(response => response.json())
             .then(data => {
@@ -30,8 +33,6 @@ function getWeatherForecast(city) {
 
                 document.getElementById("setDate").innerHTML = time[0];
                 document.getElementById("setWeatherImg").src = data.current.condition.icon;
-
-                const format = document.getElementById("getFormatValue").value;
 
                 if (format == "C") {
                     document.getElementById("setTemp").innerHTML = data.current.temp_c;
@@ -205,19 +206,66 @@ function getWeatherForecast(city) {
                 } else if (airQuality >= 250) {
                     document.getElementById("setAirQuality").innerHTML = data.current.air_quality.pm2_5 + " (Hazardous)";
                 }
-
-
-
-
-
-
-
-
-
-
-
-
             });
+
+        for (let i = 1; i <= 7; i++) {
+            var date = new Date();
+            date.setDate(date.getDate() - i);
+            var year = date.getUTCFullYear();
+            var month = date.getUTCMonth() + 1;
+            var day = date.getUTCDate();
+            let week = date.getUTCDay();
+            
+            fetch(`https://api.weatherapi.com/v1/history.json?key=${weatherAPIKey}&q=${city}&dt=${year}-${month}-${day}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    
+                    if(format == "C"){
+                        $(".pastSliderWrapper").append(
+                            `
+                            <div class="card mb-3 pastSlider">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 position-relative">
+                                            <div class="position-absolute top-50 start-0 translate-middle-y ms-3">
+                                                <h6 class="card-title">${getWeekName(week)}</h6>
+                                                <h6 class="condition">${data.forecast.forecastday[0].day.condition.text}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <img src="${data.forecast.forecastday[0].day.condition.icon}" alt="past-weather-img">
+                                            <h4><span class="temp">${data.forecast.forecastday[0].day.avgtemp_c}</span><span class="format"> &deg;C</span></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                        )
+                    } else {
+                        $(".pastSliderWrapper").append(
+                            `
+                            <div class="card mb-3 pastSlider">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-6 position-relative">
+                                            <div class="position-absolute top-50 start-0 translate-middle-y ms-3">
+                                                <h6 class="card-title">${getWeekName(week)}</h6>
+                                                <h6 class="condition">${data.forecast.forecastday[0].day.condition.text}</h6>
+                                            </div>
+                                        </div>
+                                        <div class="col-6 text-center">
+                                            <img src="${data.forecast.forecastday[0].day.condition.icon}" alt="past-weather-img">
+                                            <h4><span class="temp">${data.forecast.forecastday[0].day.avgtemp_f}</span><span class="format"> &deg;F</span></h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                        )
+                    }
+                })
+        }
     } catch (error) {
         console.log(error);
     }
@@ -263,3 +311,21 @@ var swiper = new Swiper(".futureSlider", {
     },
 });
 
+// get week name
+function getWeekName(num) {
+    if (num == 0) {
+        return "Sunday";
+    } else if (num == 1) {
+        return "Monday";
+    } else if (num == 2) {
+        return "Tuesday";
+    } else if (num == 3) {
+        return "Wednesday";
+    } else if (num == 4) {
+        return "Thursday";
+    } else if (num == 5) {
+        return "Friday";
+    } else {
+        return "Saturday";
+    }
+}

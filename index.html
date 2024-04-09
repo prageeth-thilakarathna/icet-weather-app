@@ -27,6 +27,8 @@
     <!-- swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+
+
 </head>
 
 <body>
@@ -175,7 +177,37 @@
         </div>
     </div>
 
-    
+    <!-- map and history -->
+    <div class="container-fluid map">
+        <div class="row">
+            <!-- map -->
+            <div class="col-12 col-sm-12 col-lg-8 col-xxl-9 weather_map">
+                <div class="my-3">
+                    <button class="label px-3">Weather Map</button>
+                </div>
+
+                <div>
+                    <iframe class="interactive_weather_map" src="https://mapa.tutiempo.net/en/#13.68869;78.5083;5"
+                        scrolling="no" webkitallowfullscreen="true" mozallowfullscreen="true"
+                        allowfullscreen="true"></iframe>
+                </div>
+            </div>
+
+            <!-- history -->
+            <div class="col-12 col-sm-12 col-lg-4 col-xxl-3 history">
+                <div class="my-3">
+                    <button class="label px-3">Past 07 Days</button>
+                </div>
+
+                <div class="overflow-y-auto past pastSliderWrapper"></div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 
 
