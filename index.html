@@ -24,8 +24,8 @@
     <!-- bootstrap icon -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
-    <!-- swiper -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- owl carousel -->
+    <link rel="stylesheet" href="assets/plugin/owlCarousel/owl.carousel.min.css">
 
 
 
@@ -54,8 +54,7 @@
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xxl-8 search d-flex my-3 px-4">
-                <button class="btnSearch" type="submit"><i class="fa fa-search" aria-hidden="true" style="width: 30px;"
-                        onclick="getWeatherForecast(document.getElementById(`searchCity`).value)"></i></button>
+                <button class="btnSearch" type="submit"></button>
                 <input class="form-control me-2 focus-ring" type="search" id="searchCity" placeholder="Search City..."
                     aria-label="Search" style="--bs-focus-ring-color: var(--label_extra);">
             </div>
@@ -82,7 +81,7 @@
 
                         <div class="row mt-2">
                             <div class="col-6">
-                                <h6 class="card-subtitle" id="setDate"></h6>
+                                <h6 class="card-subtitle" id="setDay"></h6>
                             </div>
                             <div class="col-6 text-end">
                                 <h6 class="time" id="setTime"></h6>
@@ -165,13 +164,19 @@
             <!-- forecast -->
             <div class="col-md-5 col-lg-7 forecast">
                 <div class="my-3">
-                    <button class="label px-3">10 Days Forecast</button>
+                    <button class="label px-3">Next 09 Days Forecast</button>
                 </div>
 
-                <div class="swiper futureSlider">
-                    <div class="swiper-wrapper futureSliderWrapper"></div>
-                    <div class="swiper-button-next futureSliderNext"></div>
-                    <div class="swiper-button-prev futureSliderPrev"></div>
+                <div class="owl-carousel forecastCarousel">
+                    <div class="futureOwlCarousel-1"></div>
+                    <div class="futureOwlCarousel-2"></div>
+                    <div class="futureOwlCarousel-3"></div>
+                    <div class="futureOwlCarousel-4"></div>
+                    <div class="futureOwlCarousel-5"></div>
+                    <div class="futureOwlCarousel-6"></div>
+                    <div class="futureOwlCarousel-7"></div>
+                    <div class="futureOwlCarousel-8"></div>
+                    <div class="futureOwlCarousel-9"></div>
                 </div>
             </div>
         </div>
@@ -205,6 +210,17 @@
         </div>
     </div>
 
+    <!-- error message -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="assets/images/error-icon.png" class="rounded me-2" alt="error-icon" style="width: 20px;">
+                <strong class="me-auto errorHeader"></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body errorBody"></div>
+        </div>
+    </div>
 
 
 
@@ -232,7 +248,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="assets/plugin/owlCarousel/owl.carousel.min.js"></script>
     <script src="assets/js/script.js"></script>
 </body>
 

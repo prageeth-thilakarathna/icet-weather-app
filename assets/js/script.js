@@ -3,22 +3,48 @@ console.log("script is working...");
 const weatherAPIKey = "ae5e906c4f6f4f5682a130925240804";
 const defaultCity = "Panadura";
 var currentCity = "";
+var errorStatus = "";
+var errorCondition = false;
 
 window.onload = function () {
+    // search button
+    $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
+
     document.getElementById("searchCity").value = "";
     getWeatherForecast(defaultCity);
 }
 
 function getWeatherForecast(city) {
-    $(".swiper-slide").remove();
-    $(".pastSlider").remove();
+    $(".btnSearchIcon").remove();
+    $(".btnSearch").append(`<i class="fa fa-spinner fa-pulse fa-fw btnSpinnerIcon" style="width: 35px;"></i>`);
+    $(".errorHeader span").remove();
+    $(".errorBody span").remove();
+
     try {
         const format = document.getElementById("getFormatValue").value;
 
         fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${city}&days=10&aqi=yes&alerts=yes`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    console.log(`HTTP error! Status: ${response.status}`);
+                    errorStatus = response.status;
+                    errorCondition = true;
+                }
+                return response.json();
+            })
             .then(data => {
-                console.log(data);
+                if (errorCondition) {
+                    displayErrorMessage(data);
+                    console.log(data);
+                    document.getElementById("searchCity").value = "";
+                    $(".btnSpinnerIcon").remove();
+                    $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
+                } else {
+                    document.getElementById("searchCity").value = "";
+                    $(".futureCarousel").remove();
+                    $(".pastSlider").remove();
+                }
+
                 currentCity = data.location.name;
                 document.getElementById("setLocation").innerHTML = data.location.name + ", " + data.location.country;
 
@@ -31,7 +57,9 @@ function getWeatherForecast(city) {
                     document.getElementById("setTime").innerHTML = time[1] + " PM";
                 }
 
-                document.getElementById("setDate").innerHTML = time[0];
+                var day = new Date();
+
+                document.getElementById("setDay").innerHTML = getWeekName(day.getUTCDay());
                 document.getElementById("setWeatherImg").src = data.current.condition.icon;
 
                 if (format == "C") {
@@ -45,32 +73,23 @@ function getWeatherForecast(city) {
                     document.getElementById("setGustWind").innerHTML = data.current.gust_kph + " kph";
 
                     for (let i = 1; i < 10; i++) {
-                        var forecastAirQuality = data.forecast.forecastday[i].day.air_quality.pm2_5;
-                        var forecastAQValue = "";
-                        if (forecastAirQuality >= 0 && forecastAirQuality < 12) {
-                            forecastAQValue = "Good";
-                        } else if (forecastAirQuality >= 12 && forecastAirQuality < 35) {
-                            forecastAQValue = "Moderate";
-                        } else if (forecastAirQuality >= 35 && forecastAirQuality < 55) {
-                            forecastAQValue = "Unhealthy for Sensitive Groups";
-                        } else if (forecastAirQuality >= 55 && forecastAirQuality < 150) {
-                            forecastAQValue = "Unhealthy";
-                        } else if (forecastAirQuality >= 150 && forecastAirQuality < 250) {
-                            forecastAQValue = "Very Unhealthy";
-                        } else if (forecastAirQuality >= 250) {
-                            forecastAQValue = "Hazardous";
-                        }
-                        $(".futureSliderWrapper").append(
+                        var fetureDay = new Date();
+                        fetureDay.setDate(fetureDay.getDate() + i);
+                        var forecastDay = getWeekNameShortForm(fetureDay.getUTCDay());
+
+                        var futureDate = data.forecast.forecastday[i].date.split("-");
+
+                        $(`.futureOwlCarousel-${i}`).append(
                             `
-                            <div class="swiper-slide">
+                            <div class="futureCarousel">
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
-                                                <h6 class="card-title">${data.forecast.forecastday[i].date}</h6>
+                                                <h6 class="card-title">${forecastDay} ${futureDate[2]}</h6>
                                             </div>
     
-                                            <div class="col-12">
+                                            <div class="col-12 d-flex justify-content-center">
                                                 <img src="${data.forecast.forecastday[i].day.condition.icon}" class="forecastImg" alt="weather-img">
                                             </div>
     
@@ -98,7 +117,7 @@ function getWeatherForecast(city) {
                                             </div>
     
                                             <div class="col-12">
-                                                <h6><span class="label">AQ : </span><span class="value">${forecastAQValue}</span>
+                                                <h6><span class="label">UV Radiation : </span><span class="value">${data.forecast.forecastday[i].day.uv} Index</span>
                                                 </h6>
                                             </div>
                                         </div>
@@ -120,32 +139,23 @@ function getWeatherForecast(city) {
                     document.getElementById("setGustWind").innerHTML = data.current.gust_mph + " mph";
 
                     for (let i = 1; i < 10; i++) {
-                        var forecastAirQuality = data.forecast.forecastday[i].day.air_quality.pm2_5;
-                        var forecastAQValue = "";
-                        if (forecastAirQuality >= 0 && forecastAirQuality < 12) {
-                            forecastAQValue = "Good";
-                        } else if (forecastAirQuality >= 12 && forecastAirQuality < 35) {
-                            forecastAQValue = "Moderate";
-                        } else if (forecastAirQuality >= 35 && forecastAirQuality < 55) {
-                            forecastAQValue = "Unhealthy for Sensitive Groups";
-                        } else if (forecastAirQuality >= 55 && forecastAirQuality < 150) {
-                            forecastAQValue = "Unhealthy";
-                        } else if (forecastAirQuality >= 150 && forecastAirQuality < 250) {
-                            forecastAQValue = "Very Unhealthy";
-                        } else if (forecastAirQuality >= 250) {
-                            forecastAQValue = "Hazardous";
-                        }
-                        $(".futureSliderWrapper").append(
+                        var fetureDay = new Date();
+                        fetureDay.setDate(fetureDay.getDate() + i);
+                        var forecastDay = getWeekNameShortForm(fetureDay.getUTCDay());
+
+                        var futureDate = data.forecast.forecastday[i].date.split("-");
+
+                        $(`.futureOwlCarousel-${i}`).append(
                             `
-                            <div class="swiper-slide">
+                            <div class="futureCarousel">
                                 <div class="card text-center">
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-12">
-                                                <h6 class="card-title">${data.forecast.forecastday[i].date}</h6>
+                                                <h6 class="card-title">${forecastDay} ${futureDate[2]}</h6>
                                             </div>
     
-                                            <div class="col-12">
+                                            <div class="col-12 d-flex justify-content-center">
                                                 <img src="${data.forecast.forecastday[i].day.condition.icon}" class="forecastImg" alt="weather-img">
                                             </div>
     
@@ -173,7 +183,7 @@ function getWeatherForecast(city) {
                                             </div>
     
                                             <div class="col-12">
-                                                <h6><span class="label">AQ : </span><span class="value">${forecastAQValue}</span>
+                                                <h6><span class="label">UV Radiation : </span><span class="value">${data.forecast.forecastday[i].day.uv} Index</span>
                                                 </h6>
                                             </div>
                                         </div>
@@ -215,13 +225,11 @@ function getWeatherForecast(city) {
             var month = date.getUTCMonth() + 1;
             var day = date.getUTCDate();
             let week = date.getUTCDay();
-            
+
             fetch(`https://api.weatherapi.com/v1/history.json?key=${weatherAPIKey}&q=${city}&dt=${year}-${month}-${day}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);
-                    
-                    if(format == "C"){
+                    if (format == "C") {
                         $(".pastSliderWrapper").append(
                             `
                             <div class="card mb-3 pastSlider">
@@ -264,8 +272,15 @@ function getWeatherForecast(city) {
                             `
                         )
                     }
+
+                    if (i == 7) {
+                        $(".btnSpinnerIcon").remove();
+                        $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
+                    }
                 })
         }
+
+
     } catch (error) {
         console.log(error);
     }
@@ -276,39 +291,37 @@ function formatController() {
 }
 
 // future weather
-var swiper = new Swiper(".futureSlider", {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    navigation: {
-        nextEl: ".futureSliderNext",
-        prevEl: ".futureSliderPrev",
-    },
-    breakpoints: {
-        0: {
-            slidesPerView: 1,
-            spaceBetween: 20,
-        },
-        576: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-        },
-        768: {
-            slidesPerView: 1,
-            spaceBetween: 40,
-        },
-        992: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-        },
-        1200: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-        },
-        1400: {
-            slidesPerView: 4,
-            spaceBetween: 10,
-        },
-    },
+$(document).ready(function () {
+    $(".forecastCarousel").owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: true,
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 2,
+            },
+            768: {
+                items: 1,
+            },
+            992: {
+                items: 2,
+            },
+            1200: {
+                items: 3,
+            },
+            1400: {
+                items: 4,
+            }
+        }
+    });
+    $(".owl-dots").remove();
+    $(".owl-prev span").remove();
+    $(".owl-next span").remove();
+    $(".owl-prev").append(`<i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>`);
+    $(".owl-next").append(`<i class="fa fa-arrow-circle-o-right" aria-hidden="true"></i>`);
 });
 
 // get week name
@@ -328,4 +341,35 @@ function getWeekName(num) {
     } else {
         return "Saturday";
     }
+}
+
+// get week name short form
+function getWeekNameShortForm(num) {
+    if (num == 0) {
+        return "Sun";
+    } else if (num == 1) {
+        return "Mon";
+    } else if (num == 2) {
+        return "Tue";
+    } else if (num == 3) {
+        return "Wed";
+    } else if (num == 4) {
+        return "Thu";
+    } else if (num == 5) {
+        return "Fri";
+    } else {
+        return "Sat";
+    }
+}
+
+// error message
+function displayErrorMessage(error) {
+    const toastLive = document.getElementById('liveToast');
+    $(".errorHeader").append(`<span>HTTP error! Status: ${errorStatus}</span>`);
+    $(".errorBody").append(`<span>${error.error.message}</span>`);
+
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
+    toastBootstrap.show();
+    errorCondition = false;
+    console.log("error message displaed.")
 }

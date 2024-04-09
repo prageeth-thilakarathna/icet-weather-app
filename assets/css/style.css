@@ -164,6 +164,24 @@
     font-weight: var(--blod);
 }
 
+.weather .forecast .forecastCarousel .owl-nav {
+    text-align: center;
+}
+
+.weather .forecast .forecastCarousel .owl-nav .owl-prev i {
+    color: var(--typography);
+    font-size: var(--text-header-h6);
+    margin-top: 5px;
+    margin-right: 2.5px;
+}
+
+.weather .forecast .forecastCarousel .owl-nav .owl-next i {
+    color: var(--typography);
+    font-size: var(--text-header-h6);
+    margin-top: 5px;
+    margin-left: 2.5px;
+}
+
 
 /*========== map and history ==========*/
 .map {
@@ -199,28 +217,28 @@
     color: var(--typography);
 }
 
-.map .history .past .card .card-title{
+.map .history .past .card .card-title {
     font-size: var(--text-header-h6);
     font-weight: var(--medium);
 }
 
-.map .history .past .card .condition{
+.map .history .past .card .condition {
     font-size: var(--text-body);
     font-weight: var(--medium);
 }
 
-.map .history .past .card img{
+.map .history .past .card img {
     width: 80px;
     height: 80px;
     object-fit: contain;
 }
 
-.map .history .past .card h4 .temp{
+.map .history .past .card h4 .temp {
     font-size: var(--text-header-h4);
     font-weight: var(--blod);
 }
 
-.map .history .past .card h4 .format{
+.map .history .past .card h4 .format {
     font-size: var(--text-header-h6);
     font-weight: var(--medium);
 }
