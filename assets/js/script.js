@@ -1,5 +1,3 @@
-console.log("script is working...");
-
 const weatherAPIKey = "ae5e906c4f6f4f5682a130925240804";
 const defaultCity = "Panadura";
 var currentCity = "";

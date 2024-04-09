@@ -46,9 +46,9 @@
             <div class="col-3 col-sm-2 col-md-2 col-lg-1 formats text-end">
                 <div class="my-3 me-3">
                     <select class="form focus-ring py-2 px-2" id="getFormatValue"
-                        style="--bs-focus-ring-color: var(--label_extra);">
-                        <option selected value="C" onclick="formatController()">&deg;C</option>
-                        <option value="F" onclick="formatController()">&deg;F</option>
+                        style="--bs-focus-ring-color: var(--label_extra);" onchange="formatController()">
+                        <option selected value="C">&deg;C</option>
+                        <option value="F">&deg;F</option>
                     </select>
                 </div>
             </div>
