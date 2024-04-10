@@ -235,8 +235,14 @@ function getWeatherForecast(city) {
             let week = date.getDay();
 
             fetch(`https://api.weatherapi.com/v1/history.json?key=${weatherAPIKey}&q=${city}&dt=${year}-${month}-${day}`)
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        console.log(`HTTP error! Status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
+                    console.log(data);
                     if (format == "C") {
                         $(".pastSliderWrapper").append(
                             `
@@ -302,7 +308,7 @@ function formatController() {
 // future weather
 $(document).ready(function () {
     $(".forecastCarousel").owlCarousel({
-        loop: true,
+        loop: false,
         margin: 10,
         nav: true,
         responsive: {
