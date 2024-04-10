@@ -43,7 +43,6 @@ function getWeatherForecast(city) {
                 } else {
                     document.getElementById("searchCity").value = "";
                     $(".futureCarousel").remove();
-                    $(".pastSlider").remove();
                 }
 
                 currentCity = data.location.name;
@@ -238,15 +237,26 @@ function getWeatherForecast(city) {
                 .then(response => {
                     if (!response.ok) {
                         console.log(`HTTP error! Status: ${response.status}`);
+                        errorStatus = response.status;
+                        errorCondition = true;
                     }
                     return response.json();
                 })
                 .then(data => {
-                    console.log(data);
+                    if (errorCondition) {
+                        displayErrorMessage(data);
+                        console.log(data);
+                        document.getElementById("searchCity").value = "";
+                        $(".btnSpinnerIcon").remove();
+                        $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
+                    } else {
+                        $(`.pastSlider-${i}`).remove();
+                    }
+
                     if (format == "C") {
-                        $(".pastSliderWrapper").append(
+                        $(`.pastSliderWrapper-${i}`).append(
                             `
-                            <div class="card mb-3 pastSlider">
+                            <div class="card mb-3 pastSlider-${i}">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-6 position-relative">
@@ -265,9 +275,9 @@ function getWeatherForecast(city) {
                             `
                         )
                     } else {
-                        $(".pastSliderWrapper").append(
+                        $(`.pastSliderWrapper-${i}`).append(
                             `
-                            <div class="card mb-3 pastSlider">
+                            <div class="card mb-3 pastSlider-${i}">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-6 position-relative">
@@ -385,11 +395,12 @@ function displayErrorMessage(error) {
 
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
     toastBootstrap.show();
+    errorStatus = "";
     errorCondition = false;
 }
 
 // notify clear
-function notifyClear(){
+function notifyClear() {
     $(".notification").remove();
     $(".visually-hidden").remove();
     btnNotifyClear.setAttribute("style", "cursor: default; pointer-events: none;");
