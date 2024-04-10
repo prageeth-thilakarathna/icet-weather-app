@@ -270,6 +270,31 @@
 }
 
 
+/*========== footer ==========*/
+.footer {
+    background-color: var(--back-ground-third);
+}
+
+.footer footer {
+    border-top: 1px solid var(--back-ground-second);
+}
+
+.footer footer .nav li a .fa {
+    color: var(--typography);
+    font-size: var(--text-header-h6);
+}
+
+.footer footer .copy a,span{
+    color: var(--typography);
+    font-size: var(--text-body);
+    font-weight: var(--medium);
+}
+
+
+
+
+
+
 /*========== scrollbar style ==========*/
 ::-webkit-scrollbar {
     width: 5px;
@@ -317,30 +342,14 @@
 
 
 /*========== media ==========*/
-@media screen and (max-width: 991px) {
-    .desktop {
+@media screen and (min-width: 768px) {
+    .small {
         display: none;
     }
 }
 
-@media screen and (min-width: 992px) {
-    .tablet {
-        display: none;
-    }
-
-    .mobile {
-        display: none;
-    }
-}
-
-@media screen and (min-width: 576px) and (max-width: 991px) {
-    .mobile {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 575px) {
-    .tablet {
+@media screen and (max-width: 767px) {
+    .large{
         display: none;
     }
 }
