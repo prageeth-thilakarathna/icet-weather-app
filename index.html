@@ -59,7 +59,7 @@
             </div>
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xxl-8 search d-flex my-3 px-4">
-                <button class="btnSearch" type="submit"></button>
+                <button class="btnSearch" type="submit" id="searchButton"></button>
                 <input class="form-control me-2 focus-ring" type="search" id="searchCity" placeholder="Search City..."
                     aria-label="Search" style="--bs-focus-ring-color: var(--label_extra);">
             </div>
@@ -223,7 +223,7 @@
     </div>
 
     <!-- error message -->
-    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div class="toast-container position-fixed bottom-0 end-0 p-3 errorMessage">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="assets/images/error-icon.png" class="rounded me-2" alt="error-icon" style="width: 20px;">

@@ -4,6 +4,8 @@ var currentCity = "";
 var errorStatus = "";
 var errorCondition = false;
 var btnNotifyClear = document.getElementById("btnNotifyClear");
+var searchCityInputBox = document.getElementById("searchCity");
+var searchButton = document.getElementById("searchButton");
 
 window.onload = function () {
     // search button
@@ -11,13 +13,12 @@ window.onload = function () {
 
     document.getElementById("searchCity").value = "";
     getWeatherForecast(defaultCity);
+    searchListner();
 }
 
 function getWeatherForecast(city) {
     $(".btnSearchIcon").remove();
     $(".btnSearch").append(`<i class="fa fa-spinner fa-pulse fa-fw btnSpinnerIcon" style="width: 35px;"></i>`);
-    $(".errorHeader span").remove();
-    $(".errorBody span").remove();
     $(".noNotification").remove();
     btnNotifyClear.setAttribute("style", "cursor: pointer; pointer-events: auto;");
 
@@ -30,6 +31,8 @@ function getWeatherForecast(city) {
                     console.log(`HTTP error! Status: ${response.status}`);
                     errorStatus = response.status;
                     errorCondition = true;
+                    $(".errorHeader span").remove();
+                    $(".errorBody span").remove();
                 }
                 return response.json();
             })
@@ -40,6 +43,7 @@ function getWeatherForecast(city) {
                     document.getElementById("searchCity").value = "";
                     $(".btnSpinnerIcon").remove();
                     $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
+                    searchListner();
                 } else {
                     document.getElementById("searchCity").value = "";
                     $(".futureCarousel").remove();
@@ -244,11 +248,8 @@ function getWeatherForecast(city) {
                 })
                 .then(data => {
                     if (errorCondition) {
-                        displayErrorMessage(data);
                         console.log(data);
-                        document.getElementById("searchCity").value = "";
-                        $(".btnSpinnerIcon").remove();
-                        $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
+                        errorCondition = false;
                     } else {
                         $(`.pastSlider-${i}`).remove();
                     }
@@ -300,6 +301,7 @@ function getWeatherForecast(city) {
                     if (i == 7) {
                         $(".btnSpinnerIcon").remove();
                         $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
+                        searchListner();
                     }
                 })
         }
@@ -409,5 +411,17 @@ function notifyClear() {
 
 btnNotifyClear.addEventListener("click", notifyClear);
 
+// search listner
+function searchListner() {
+    if (searchCityInputBox.value.length > 0) {
+        searchButton.disabled = false;
+        searchButton.setAttribute("style", "cursor: pointer; pointer-events: auto;");
+    } else {
+        searchButton.disabled = true;
+        searchButton.setAttribute("style", "cursor: default; pointer-events: none;");
+    }
+}
 
-
+searchCityInputBox.addEventListener("input", (event) => {
+    searchListner();
+});

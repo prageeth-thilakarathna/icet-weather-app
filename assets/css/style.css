@@ -270,6 +270,23 @@
 }
 
 
+/*========== error message ==========*/
+.errorMessage .errorHeader span{
+    color: var(--back-ground-primary);
+    font-size: var(--text-subtitle);
+    font-weight: var(--blod);
+}
+
+.errorMessage .errorBody span{
+    color: var(--back-ground-third);
+    font-size: var(--text-body);
+    font-weight: var(--medium);
+}
+
+
+
+
+
 /*========== footer ==========*/
 .footer {
     background-color: var(--back-ground-third);
