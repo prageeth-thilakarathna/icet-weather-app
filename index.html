@@ -39,8 +39,14 @@
                 <h3 class="my-3 ms-3">Weather App</h3>
             </div>
 
-            <div class="col-3 col-sm-2 col-md-2 col-lg-1 notify text-end">
-                <i class="fa fa-bell mt-4" aria-hidden="true" style="cursor: pointer;"></i>
+            <div class="col-3 col-sm-2 col-md-2 col-lg-1 notify text-end dropdown">
+                <i class="fa fa-bell mt-4 dropdown-toggle position-relative" aria-hidden="true"
+                    style="cursor: pointer;" data-bs-toggle="dropdown" data-bs-auto-close="outside"
+                    aria-expanded="false"><span
+                        class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-primary p-2"></span></i>
+                <ul class="dropdown-menu notificationAdd">
+                    <li><a class="notification_clear ms-2" id="btnNotifyClear" type="button">Clear All</a></li>
+                </ul>
             </div>
 
             <div class="col-3 col-sm-2 col-md-2 col-lg-1 formats text-end">
@@ -221,6 +227,8 @@
             <div class="toast-body errorBody"></div>
         </div>
     </div>
+
+    <!-- footer -->
 
 
 

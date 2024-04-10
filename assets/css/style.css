@@ -58,11 +58,6 @@
     color: var(--typography);
 }
 
-.header .notify {
-    color: var(--typography);
-    font-size: var(--text-header-h6);
-}
-
 .header .formats .form {
     border: none;
     border-radius: 10px;
@@ -70,6 +65,37 @@
     color: var(--typography);
     font-size: var(--text-header-h6);
     font-weight: var(--medium);
+}
+
+/*--- notify ---*/
+.header .notify {
+    color: var(--typography);
+    font-size: var(--text-header-h6);
+}
+
+.header .notify .notification_clear{
+    font-size: var(--text-subtitle);
+    color: var(--typography);
+    cursor: pointer;
+}
+
+.header .notify .dropdown-menu{
+    background-color: var(--back-ground-third);
+}
+
+.header .notify .dropdown-menu .notification a {
+    color: var(--typography);
+    font-size: var(--text-body);
+    cursor: pointer;
+}
+
+.header .notify .dropdown-menu .notification a:hover{
+    background-color: var(--back-ground-second);
+}
+
+.header .notify .dropdown-menu .noNotification{
+    color: var(--typography);
+    font-size: var(--text-body);
 }
 
 

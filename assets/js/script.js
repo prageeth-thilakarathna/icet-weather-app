@@ -3,6 +3,7 @@ const defaultCity = "Panadura";
 var currentCity = "";
 var errorStatus = "";
 var errorCondition = false;
+var btnNotifyClear = document.getElementById("btnNotifyClear");
 
 window.onload = function () {
     // search button
@@ -17,6 +18,8 @@ function getWeatherForecast(city) {
     $(".btnSearch").append(`<i class="fa fa-spinner fa-pulse fa-fw btnSpinnerIcon" style="width: 35px;"></i>`);
     $(".errorHeader span").remove();
     $(".errorBody span").remove();
+    $(".noNotification").remove();
+    btnNotifyClear.setAttribute("style", "cursor: pointer; pointer-events: auto;");
 
     try {
         const format = document.getElementById("getFormatValue").value;
@@ -57,7 +60,7 @@ function getWeatherForecast(city) {
 
                 var day = new Date();
 
-                document.getElementById("setDay").innerHTML = getWeekName(day.getUTCDay());
+                document.getElementById("setDay").innerHTML = getWeekName(day.getDay());
                 document.getElementById("setWeatherImg").src = data.current.condition.icon;
 
                 if (format == "C") {
@@ -73,7 +76,7 @@ function getWeatherForecast(city) {
                     for (let i = 1; i < 10; i++) {
                         var fetureDay = new Date();
                         fetureDay.setDate(fetureDay.getDate() + i);
-                        var forecastDay = getWeekNameShortForm(fetureDay.getUTCDay());
+                        var forecastDay = getWeekNameShortForm(fetureDay.getDay());
 
                         var futureDate = data.forecast.forecastday[i].date.split("-");
 
@@ -139,7 +142,7 @@ function getWeatherForecast(city) {
                     for (let i = 1; i < 10; i++) {
                         var fetureDay = new Date();
                         fetureDay.setDate(fetureDay.getDate() + i);
-                        var forecastDay = getWeekNameShortForm(fetureDay.getUTCDay());
+                        var forecastDay = getWeekNameShortForm(fetureDay.getDay());
 
                         var futureDate = data.forecast.forecastday[i].date.split("-");
 
@@ -214,15 +217,22 @@ function getWeatherForecast(city) {
                 } else if (airQuality >= 250) {
                     document.getElementById("setAirQuality").innerHTML = data.current.air_quality.pm2_5 + " (Hazardous)";
                 }
+
+                /*-- add notification --*/
+                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunrise &nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunrise}</a></li>`);
+                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunset &nbsp&nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunset}</a></li>`);
+                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonrise : ${data.forecast.forecastday[0].astro.moonrise}</a></li>`);
+                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonset &nbsp: ${data.forecast.forecastday[0].astro.moonset}</a></li>`);
+                $(".badge").append(`<span class="visually-hidden">unread notification</span>`);
             });
 
         for (let i = 1; i <= 7; i++) {
             var date = new Date();
             date.setDate(date.getDate() - i);
-            var year = date.getUTCFullYear();
-            var month = date.getUTCMonth() + 1;
-            var day = date.getUTCDate();
-            let week = date.getUTCDay();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var day = date.getDate();
+            let week = date.getDay();
 
             fetch(`https://api.weatherapi.com/v1/history.json?key=${weatherAPIKey}&q=${city}&dt=${year}-${month}-${day}`)
                 .then(response => response.json())
@@ -284,6 +294,7 @@ function getWeatherForecast(city) {
     }
 }
 
+// format change
 function formatController() {
     getWeatherForecast(currentCity);
 }
@@ -369,5 +380,17 @@ function displayErrorMessage(error) {
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
     toastBootstrap.show();
     errorCondition = false;
-    console.log("error message displaed.")
 }
+
+// notify clear
+function notifyClear(){
+    $(".notification").remove();
+    $(".visually-hidden").remove();
+    btnNotifyClear.setAttribute("style", "cursor: default; pointer-events: none;");
+    $(".notificationAdd").append(`<li class="noNotification text-center mt-3">No Notification</li>`);
+}
+
+btnNotifyClear.addEventListener("click", notifyClear);
+
+
+
