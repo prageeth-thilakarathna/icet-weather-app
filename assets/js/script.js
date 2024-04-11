@@ -7,6 +7,7 @@ var btnNotifyClear = document.getElementById("btnNotifyClear");
 var searchCityInputBox = document.getElementById("searchCity");
 var searchButton = document.getElementById("searchButton");
 var isFormatChange = false;
+const toastLive = document.getElementById("liveToast");
 
 window.onload = function () {
     // search button
@@ -29,14 +30,15 @@ function getWeatherForecast(city) {
     try {
         const format = document.getElementById("getFormatValue").value;
 
-        fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${city}&days=3&aqi=yes&alerts=yes`)
+        fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${city}&days=10&aqi=yes&alerts=yes`)
             .then(response => {
                 if (!response.ok) {
                     console.log(`HTTP error! Status: ${response.status}`);
                     errorStatus = response.status;
                     errorCondition = true;
-                    $(".errorHeader span").remove();
-                    $(".errorBody span").remove();
+                    $(".toastAddedIcon").remove();
+                    $(".toastHeader span").remove();
+                    $(".toastBody span").remove();
                 }
                 return response.json();
             })
@@ -71,6 +73,13 @@ function getWeatherForecast(city) {
                 document.getElementById("setWeatherImg").src = data.current.condition.icon;
 
                 let forecastLength = data.forecast.forecastday.length;
+
+                if (forecastLength < 10) {
+                    $(".toastAddedIcon").remove();
+                    $(".toastHeader span").remove();
+                    $(".toastBody span").remove();
+                    displayInfoMessage("Weather Forecast Info", "The weather API trial ends! Therefore the weather forecast is limited to 02 days.");
+                }
 
                 if (format == "C") {
                     document.getElementById("setTemp").innerHTML = data.current.temp_c;
@@ -401,14 +410,24 @@ function getWeekNameShortForm(num) {
 
 // error message
 function displayErrorMessage(error) {
-    const toastLive = document.getElementById('liveToast');
-    $(".errorHeader").append(`<span>HTTP error! Status: ${errorStatus}</span>`);
-    $(".errorBody").append(`<span>${error.error.message}</span>`);
+    $(".toastIcon").append(`<img src="assets/images/error-icon.png" class="rounded me-2 toastAddedIcon" alt="error-icon" style="width: 20px;">`);
+    $(".toastHeader").append(`<span>HTTP error! Status: ${errorStatus}</span>`);
+    $(".toastBody").append(`<span>${error.error.message}</span>`);
 
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
     toastBootstrap.show();
     errorStatus = "";
     errorCondition = false;
+}
+
+// info message
+function displayInfoMessage(head, info) {
+    $(".toastIcon").append(`<img src="assets/images/question-icon.png" class="rounded me-2 toastAddedIcon" alt="error-icon" style="width: 20px;">`);
+    $(".toastHeader").append(`<span>${head}</span>`);
+    $(".toastBody").append(`<span>${info}</span>`);
+
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLive);
+    toastBootstrap.show();
 }
 
 // notify clear

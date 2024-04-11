@@ -26,6 +26,7 @@
     --blod: 700;
 }
 
+
 /*========== header ==========*/
 .header {
     background-color: var(--back-ground-primary);
@@ -270,21 +271,18 @@
 }
 
 
-/*========== error message ==========*/
-.errorMessage .errorHeader span{
+/*========== toast message ==========*/
+.toastMessage .toastHeader span{
     color: var(--back-ground-primary);
     font-size: var(--text-subtitle);
     font-weight: var(--blod);
 }
 
-.errorMessage .errorBody span{
+.toastMessage .toastBody span{
     color: var(--back-ground-third);
     font-size: var(--text-body);
     font-weight: var(--medium);
 }
-
-
-
 
 
 /*========== footer ==========*/
@@ -308,10 +306,6 @@
 }
 
 
-
-
-
-
 /*========== scrollbar style ==========*/
 ::-webkit-scrollbar {
     width: 5px;
@@ -333,29 +327,6 @@
 ::-webkit-scrollbar-thumb:hover {
     background: var(--back-ground-third);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /*========== media ==========*/
