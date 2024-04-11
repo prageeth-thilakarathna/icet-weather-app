@@ -6,6 +6,7 @@ var errorCondition = false;
 var btnNotifyClear = document.getElementById("btnNotifyClear");
 var searchCityInputBox = document.getElementById("searchCity");
 var searchButton = document.getElementById("searchButton");
+var isFormatChange = false;
 
 window.onload = function () {
     // search button
@@ -19,13 +20,16 @@ window.onload = function () {
 function getWeatherForecast(city) {
     $(".btnSearchIcon").remove();
     $(".btnSearch").append(`<i class="fa fa-spinner fa-pulse fa-fw btnSpinnerIcon" style="width: 35px;"></i>`);
-    $(".noNotification").remove();
-    btnNotifyClear.setAttribute("style", "cursor: pointer; pointer-events: auto;");
+
+    if (!isFormatChange) {
+        $(".noNotification").remove();
+        btnNotifyClear.setAttribute("style", "cursor: pointer; pointer-events: auto;");
+    }
 
     try {
         const format = document.getElementById("getFormatValue").value;
 
-        fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${city}&days=10&aqi=yes&alerts=yes`)
+        fetch(`https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${city}&days=3&aqi=yes&alerts=yes`)
             .then(response => {
                 if (!response.ok) {
                     console.log(`HTTP error! Status: ${response.status}`);
@@ -66,6 +70,8 @@ function getWeatherForecast(city) {
                 document.getElementById("setDay").innerHTML = getWeekName(day.getDay());
                 document.getElementById("setWeatherImg").src = data.current.condition.icon;
 
+                let forecastLength = data.forecast.forecastday.length;
+
                 if (format == "C") {
                     document.getElementById("setTemp").innerHTML = data.current.temp_c;
                     document.getElementById("setFormat").innerHTML = " &deg;C";
@@ -76,7 +82,7 @@ function getWeatherForecast(city) {
                     document.getElementById("setVis").innerHTML = data.current.vis_km + " km";
                     document.getElementById("setGustWind").innerHTML = data.current.gust_kph + " kph";
 
-                    for (let i = 1; i < 10; i++) {
+                    for (let i = 1; i < forecastLength; i++) {
                         var fetureDay = new Date();
                         fetureDay.setDate(fetureDay.getDate() + i);
                         var forecastDay = getWeekNameShortForm(fetureDay.getDay());
@@ -142,7 +148,7 @@ function getWeatherForecast(city) {
                     document.getElementById("setVis").innerHTML = data.current.vis_miles + " miles";
                     document.getElementById("setGustWind").innerHTML = data.current.gust_mph + " mph";
 
-                    for (let i = 1; i < 10; i++) {
+                    for (let i = 1; i < forecastLength; i++) {
                         var fetureDay = new Date();
                         fetureDay.setDate(fetureDay.getDate() + i);
                         var forecastDay = getWeekNameShortForm(fetureDay.getDay());
@@ -222,11 +228,13 @@ function getWeatherForecast(city) {
                 }
 
                 /*-- add notification --*/
-                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunrise &nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunrise}</a></li>`);
-                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunset &nbsp&nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunset}</a></li>`);
-                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonrise : ${data.forecast.forecastday[0].astro.moonrise}</a></li>`);
-                $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonset &nbsp: ${data.forecast.forecastday[0].astro.moonset}</a></li>`);
-                $(".badge").append(`<span class="visually-hidden">unread notification</span>`);
+                if (!isFormatChange) {
+                    $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunrise &nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunrise}</a></li>`);
+                    $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunset &nbsp&nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunset}</a></li>`);
+                    $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonrise : ${data.forecast.forecastday[0].astro.moonrise}</a></li>`);
+                    $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonset &nbsp: ${data.forecast.forecastday[0].astro.moonset}</a></li>`);
+                    $(".badge").append(`<span class="visually-hidden">unread notification</span>`);
+                }
             });
 
         for (let i = 1; i <= 7; i++) {
@@ -302,6 +310,7 @@ function getWeatherForecast(city) {
                         $(".btnSpinnerIcon").remove();
                         $(".btnSearch").append(`<i class="fa fa-search btnSearchIcon" aria-hidden="true" style="width: 30px;" onclick="getWeatherForecast(document.getElementById('searchCity').value)"></i>`);
                         searchListner();
+                        isFormatChange = false;
                     }
                 })
         }
@@ -314,6 +323,7 @@ function getWeatherForecast(city) {
 
 // format change
 function formatController() {
+    isFormatChange = true;
     getWeatherForecast(currentCity);
 }
 
