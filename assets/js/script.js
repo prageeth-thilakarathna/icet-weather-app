@@ -53,6 +53,7 @@ function getWeatherForecast(city) {
                 } else {
                     document.getElementById("searchCity").value = "";
                     $(".futureCarousel").remove();
+                    $(".notification").remove();
                 }
 
                 currentCity = data.location.name;
