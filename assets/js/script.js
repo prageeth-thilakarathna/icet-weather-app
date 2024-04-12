@@ -22,7 +22,7 @@ function getWeatherForecast(city) {
     $(".btnSearchIcon").remove();
     $(".btnSearch").append(`<i class="fa fa-spinner fa-pulse fa-fw btnSpinnerIcon" style="width: 35px;"></i>`);
 
-    if (!isFormatChange) {
+    if (isFormatChange == false) {
         $(".noNotification").remove();
         btnNotifyClear.setAttribute("style", "cursor: pointer; pointer-events: auto;");
     }
@@ -238,7 +238,7 @@ function getWeatherForecast(city) {
                 }
 
                 /*-- add notification --*/
-                if (!isFormatChange) {
+                if (isFormatChange == false) {
                     $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunrise &nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunrise}</a></li>`);
                     $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunset &nbsp&nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunset}</a></li>`);
                     $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonrise : ${data.forecast.forecastday[0].astro.moonrise}</a></li>`);
