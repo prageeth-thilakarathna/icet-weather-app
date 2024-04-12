@@ -53,7 +53,6 @@ function getWeatherForecast(city) {
                 } else {
                     document.getElementById("searchCity").value = "";
                     $(".futureCarousel").remove();
-                    $(".notification").remove();
                 }
 
                 currentCity = data.location.name;
@@ -239,6 +238,7 @@ function getWeatherForecast(city) {
 
                 /*-- add notification --*/
                 if (isFormatChange == false) {
+                    $(".notification").remove();
                     $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunrise &nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunrise}</a></li>`);
                     $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Sunset &nbsp&nbsp&nbsp&nbsp: ${data.forecast.forecastday[0].astro.sunset}</a></li>`);
                     $(".notificationAdd").append(`<li class="notification"><a class="dropdown-item">Moonrise : ${data.forecast.forecastday[0].astro.moonrise}</a></li>`);
